@@ -43,7 +43,7 @@ function remove(bin, info) {
 
 console.log(pkg.name, ':')
 
-if (mode === 'install' || mode === 'uninstall') {
+if (mode === 'install' || mode === 'remove') {
 	exec('npm bin -g', (err, stdout, stderr) => {
 		if (err) {
 			error(err);
