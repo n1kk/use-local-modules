@@ -27,7 +27,7 @@ function install(bin, info) {
 }
 
 function remove(bin, info) {
-	let scriptPath = path.resolve(__dirname, cli_name + i.map)
+	let scriptPath = path.resolve(bin, cli_name + info.map)
 	if (fs.existsSync(scriptPath)) {
 		try {
 			fs.unlinkSync(scriptPath)
