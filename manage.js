@@ -16,10 +16,18 @@ const error = (...args) => console.error.apply(console, ['\t'].concat(args))
 function install(bin, info) {
 	let from = path.resolve(__dirname, cli_name + info.ext)
 	let to = path.resolve(bin, cli_name + info.map)
-
+	let operation = '->'
 	try {
-		fs.copyFileSync(from, to)
-		log(`${from} -> ${to}`)
+		try {
+			fs.linkSync(from, to)
+		} catch (e) {
+
+		} finally {
+			operation = ">>"
+			fs.copyFileSync(from, to)
+		}
+
+		log(`${from} ${operation} ${to}`)
 	} catch (e) {
 		error(`ERROR while installing ${from} -> ${to}`)
 		error(e)
