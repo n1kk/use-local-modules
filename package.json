@@ -1,6 +1,6 @@
 {
   "name": "use-local-modules",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "This is a simple npm CLI tool to quickly add local `./node_modules/.bin` to environment PATH variable for current session only.",
   "scripts": {
     "install": "node manage.js install",
