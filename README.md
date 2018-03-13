@@ -13,15 +13,23 @@ Having to work with many small projects I often had a need to test out npm scrip
 ### Usage
 In Windows CMD/PowerShell just call `usemodules`, in OSX/Linux Bash you have to execute it in __current scope__: `. usemodules`, calling `source usemodules` will also work, but it's obviously longer to type.
 
+###### Examples
+
 CMD
 ```
 Microsoft Windows [Version 10.0.16299.192]
 (c) 2017 Microsoft Corporation. All rights reserved.
 
+C:\Dev\MyProject>gulp -v
+'gulp' is not recognized as an internal or external command,
+operable program or batch file.
+
 C:\Dev\MyProject>usemodules
 C:\Dev\MyProject\node_modules\.bin >> PATH
 
-C:\Dev\MyProject>
+C:\Dev\MyProject>gulp -v
+[14:25:32] CLI version 2.0.1
+[14:25:32] Local version 4.0.0-alpha.3
 ```
 
 PowerShell
@@ -42,7 +50,6 @@ PS C:\Dev\MyProject> usemodules
 C:\Dev\MyProject\node_modules\.bin >> PATH
 PS C:\Dev\MyProject> which gulp
 C:\Dev\MyProject\node_modules\.bin\gulp.CMD
-PS C:\Dev\MyProject>
 ```
 
 OSX/Linux 
@@ -55,6 +62,5 @@ user@WORKSTATION:~/dev/MyProject$ . usemodules
 ~/dev/MyProject/node_modules/.bin >> PATH
 user@WORKSTATION:~/dev/MyProject$ istanbul
 Need a command to run
-Try "istanbul help" for usage
-user@WORKSTATION:~/dev/MyProject$
+Try "istanbul help" for usage   
 ```
