@@ -21,8 +21,6 @@ function install(bin, info) {
 		try {
 			fs.linkSync(from, to)
 		} catch (e) {
-
-		} finally {
 			operation = ">>"
 			fs.copyFileSync(from, to)
 		}
