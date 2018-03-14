@@ -2,7 +2,14 @@
   "name": "use-local-modules",
   "version": "0.2.2",
   "description": "This is a simple npm CLI tool to quickly add local `./node_modules/.bin` to environment PATH variable for current session only.",
-  "repository": "https://github.com/n1kk/use-local-modules.git",
+  "homepage": "https://github.com/n1kk/use-local-modules",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/n1kk/use-local-modules.git"
+  },
+  "bugs": {
+    "url": "https://github.com/n1kk/use-local-modules/issues"
+  },
   "scripts": {
     "install": "node manage.js install",
     "uninstall": "node manage.js remove"
