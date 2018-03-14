@@ -5,10 +5,8 @@ This package installs 3 scripts to your npm's global packages directory that it 
 
 In windows while calling `usemodules` in CMD it will prioritize `.cmd` files while PowerShell will opt for `.ps1` files. For unix systems `.sh` script is installed without extension so it would be available by just it's name.
 
-Tested in Windows 10 Pro, Windows Linux Subsystem (Ubuntu flavor), Ubuntu 16.04, OSX High Sierra 10.13.3
+Tested with Nodejs v4.0.0 and NPM v2.14.2 in Windows 10 Pro, Windows Linux Subsystem (Ubuntu flavor), Ubuntu 16.04, OSX High Sierra 10.13.3. 
 
-### Why
-Having to work with many small projects I often had a need to test out npm script commands, so the choice was either to add `./node_modules/.bin/` before each executable or create temporary npm script and call `npm run ***`, both of these solutions got a bit cumbersome so I made this little package to make my life easier.
 
 ### Usage
 In Windows CMD/PowerShell just call `usemodules`, in OSX/Linux Bash you have to execute it in __current scope__: `. usemodules`, calling `source usemodules` will also work, but it's obviously longer to type.

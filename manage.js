@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const pkg = require('./package.json')
-const { exec } = require('child_process');
+const exec = require('child_process').exec;
 
 const cli_name = 'usemodules'
 const info = [
@@ -10,30 +10,37 @@ const info = [
 	{ext: '.sh', map: ''},
 ]
 const mode = process.argv[2]
-const log = (...args) => console.log.apply(console, ['\t'].concat(args))
-const error = (...args) => console.error.apply(console, ['\t'].concat(args))
+const log = function () { console.log.apply(console, ['\t'].concat([].slice.call(arguments))) }
+const error = function () { console.error.apply(console, ['\t'].concat([].slice.call(arguments))) }
 
 function install(bin, info) {
-	let from = path.resolve(__dirname, cli_name + info.ext)
-	let to = path.resolve(bin, cli_name + info.map)
-	let operation = '->'
+	var from = path.resolve(__dirname, cli_name + info.ext)
+	var to = path.resolve(bin, cli_name + info.map)
+	var operation = '->'
+	var linkErr
 	try {
 		try {
 			fs.linkSync(from, to)
 		} catch (e) {
+			linkErr = e
 			operation = ">>"
-			fs.copyFileSync(from, to)
+			if (fs.copyFileSync) {
+				fs.copyFileSync(from, to)
+			} else {
+				fs.writeFileSync(to, fs.readFileSync(from, 'utf8'), 'utf8')
+			}
 		}
 
 		log(`${from} ${operation} ${to}`)
 	} catch (e) {
-		error(`ERROR while installing ${from} -> ${to}`)
+		error(`ERROR while installing ${from} ${operation} ${to}`)
+		linkErr && error(linkErr)
 		error(e)
 	}
 }
 
 function remove(bin, info) {
-	let scriptPath = path.resolve(bin, cli_name + info.map)
+	var scriptPath = path.resolve(bin, cli_name + info.map)
 	if (fs.existsSync(scriptPath)) {
 		try {
 			fs.unlinkSync(scriptPath)
@@ -55,9 +62,9 @@ if (mode === 'install' || mode === 'remove') {
 			error(err);
 			return;
 		}
-		let globalBin = stdout.trim()
+		var globalBin = stdout.trim()
 		if (fs.existsSync(globalBin)) {
-			let action = mode === 'install' ? install : remove;
+			var action = mode === 'install' ? install : remove;
 			info.forEach(i => action(globalBin, i))
 		} else {
 			error(`Error: Could not find existing path for global npm executables. Result of "npm bin -g": "${globalBin}"`)
