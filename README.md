@@ -12,23 +12,24 @@ I know there's npx and yarn, but I needed something that worked with old node v4
 
 ### Usage
 Windows CMD/PowerShell
-```
+```text
 usemodules
 ```
 OSX/Linux Bash
-```
+```text
 . usemodules
 ```
 You have to execute it in __current scope__: `. usemodules`, calling `source usemodules` will also work, but it's obviously longer to type.
 
 ##### -g argument
+```text
+-g : Prioritize global
 ```
-    -g : Prioritize global
-```
+
 Default behaviour is to prepend directory to global PATH to look there before global bin folder, passing `-g` argument will append directory to global PATH instead, this will prioritize global packages over local.
 
 Output of the command will show you whether ir prepended or appended:
-```
+```text
 user@WORKSTATION:~/dev/MyProject$ . usemodules
 ~/dev/MyProject/node_modules/.bin : >PATH
 
@@ -57,7 +58,7 @@ C:\Dev\MyProject>gulp -v
 ```
 
 PowerShell
-```
+```text
 Windows PowerShell
 Copyright (C) Microsoft Corporation. All rights reserved.
 
@@ -77,7 +78,7 @@ C:\Dev\MyProject\node_modules\.bin\gulp.CMD
 ```
 
 OSX/Linux 
-```
+```text
 Last login: Mon Mar 12 15:30:06 on ttys002
 
 user@WORKSTATION:~/dev/MyProject$ istanbul
