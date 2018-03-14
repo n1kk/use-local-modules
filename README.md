@@ -7,14 +7,40 @@ In windows while calling `usemodules` in CMD it will prioritize `.cmd` files whi
 
 Tested with Nodejs v4.0.0 and NPM v2.14.2 in Windows 10 Pro, Windows Linux Subsystem (Ubuntu flavor), Ubuntu 16.04, OSX High Sierra 10.13.3. 
 
+### Why
+I know there's npx and yarn, but I needed something that worked with old node v4 and didn't conflict with npm scripts and wouldn't install packages if there were missing. I just needed a quick env setup to play with commands and then paste them into npm scripts.
 
 ### Usage
-In Windows CMD/PowerShell just call `usemodules`, in OSX/Linux Bash you have to execute it in __current scope__: `. usemodules`, calling `source usemodules` will also work, but it's obviously longer to type.
+Windows CMD/PowerShell
+```
+usemodules
+```
+OSX/Linux Bash
+```
+. usemodules
+```
+You have to execute it in __current scope__: `. usemodules`, calling `source usemodules` will also work, but it's obviously longer to type.
+
+##### -g argument
+```
+    -g : Prioritize global
+```
+Default behaviour is to prepend directory to global PATH to look there before global bin folder, passing `-g` argument will append directory to global PATH instead, this will prioritize global packages over local.
+
+Output of the command will show you whether ir prepended or appended:
+```
+user@WORKSTATION:~/dev/MyProject$ . usemodules
+~/dev/MyProject/node_modules/.bin : >PATH
+
+user@WORKSTATION:~/dev/MyProject$ . usemodules -g
+~/dev/MyProject/node_modules/.bin : PATH<
+```
+
 
 ###### Examples
 
 CMD
-```
+```text
 Microsoft Windows [Version 10.0.16299.192]
 (c) 2017 Microsoft Corporation. All rights reserved.
 
@@ -23,7 +49,7 @@ C:\Dev\MyProject>gulp -v
 operable program or batch file.
 
 C:\Dev\MyProject>usemodules
-C:\Dev\MyProject\node_modules\.bin >> PATH
+C:\Dev\MyProject\node_modules\.bin : >PATH
 
 C:\Dev\MyProject>gulp -v
 [14:25:32] CLI version 2.0.1
@@ -45,7 +71,7 @@ At line:1 char:1
     + FullyQualifiedErrorId : CommandNotFoundException
 
 PS C:\Dev\MyProject> usemodules
-C:\Dev\MyProject\node_modules\.bin >> PATH
+C:\Dev\MyProject\node_modules\.bin : >PATH
 PS C:\Dev\MyProject> which gulp
 C:\Dev\MyProject\node_modules\.bin\gulp.CMD
 ```
@@ -57,7 +83,7 @@ Last login: Mon Mar 12 15:30:06 on ttys002
 user@WORKSTATION:~/dev/MyProject$ istanbul
 istanbul: command not found
 user@WORKSTATION:~/dev/MyProject$ . usemodules
-~/dev/MyProject/node_modules/.bin >> PATH
+~/dev/MyProject/node_modules/.bin : >PATH
 user@WORKSTATION:~/dev/MyProject$ istanbul
 Need a command to run
 Try "istanbul help" for usage   
