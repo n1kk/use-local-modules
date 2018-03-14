@@ -8,7 +8,7 @@ In windows while calling `usemodules` in CMD it will prioritize `.cmd` files whi
 Tested with Nodejs v4.0.0 and NPM v2.14.2 in Windows 10 Pro, Windows Linux Subsystem (Ubuntu flavor), Ubuntu 16.04, OSX High Sierra 10.13.3. 
 
 ### Why
-I know there's npx and yarn, but I needed something that worked with old node v4 and didn't conflict with npm scripts and wouldn't install packages if there were missing. I just needed a quick env setup to play with commands and then paste them into npm scripts.
+I know there's npx and yarn, but I needed something that worked with old node v4 and didn't conflict with npm scripts and wouldn't install packages if they were missing. I just needed a quick env setup to play with commands and then paste them into npm scripts.
 
 ### Usage
 Windows CMD/PowerShell
