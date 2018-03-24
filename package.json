@@ -1,6 +1,6 @@
 {
   "name": "use-local-modules",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "This is a simple npm CLI tool to quickly add local `./node_modules/.bin` to environment PATH variable for current session only.",
   "homepage": "https://github.com/n1kk/use-local-modules",
   "repository": {
