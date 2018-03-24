@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -d "$(pwd)/node_modules/.bin" ]; then
-    if [ "$1" == "-g" ]; then
+    if [ "$1" = "-g" ]; then
         export PATH="$PATH:$(pwd)/node_modules/.bin"
         echo "$(pwd)/node_modules/.bin : PATH<"
     else
