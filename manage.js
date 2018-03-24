@@ -7,7 +7,7 @@ const cli_name = 'usemodules'
 const info = [
 	{ext: '.cmd', map: '.cmd'},
 	{ext: '.ps1', map: '.ps1'},
-	{ext: '.sh', map: ''},
+	{ext: '.sh', map: ''}
 ]
 const mode = process.argv[2]
 const log = function () { console.log.apply(console, ['\t'].concat([].slice.call(arguments))) }
@@ -31,9 +31,9 @@ function install(bin, info) {
 			}
 		}
 
-		log(`${from} ${operation} ${to}`)
+		log(from, operation, to)
 	} catch (e) {
-		error(`ERROR while installing ${from} ${operation} ${to}`)
+		error('ERROR while installing', from, operation, to)
 		linkErr && error(linkErr)
 		error(e)
 	}
@@ -44,9 +44,9 @@ function remove(bin, info) {
 	if (fs.existsSync(scriptPath)) {
 		try {
 			fs.unlinkSync(scriptPath)
-			log(`Removed ${scriptPath}`)
+			log('Removed', scriptPath)
 		} catch (e) {
-			error(`ERROR while removing ${scriptPath}`)
+			error('ERROR while removing', scriptPath)
 			error(e)
 		}
 	}
@@ -57,7 +57,7 @@ function remove(bin, info) {
 console.log(pkg.name, ':')
 
 if (mode === 'install' || mode === 'remove') {
-	exec('npm bin -g', (err, stdout, stderr) => {
+	exec('npm bin -g', function (err, stdout, stderr) {
 		if (err) {
 			error(err);
 			return;
@@ -65,12 +65,12 @@ if (mode === 'install' || mode === 'remove') {
 		var globalBin = stdout.trim()
 		if (fs.existsSync(globalBin)) {
 			var action = mode === 'install' ? install : remove;
-			info.forEach(i => action(globalBin, i))
+			info.forEach(function(i) { action(globalBin, i) })
 		} else {
-			error(`Error: Could not find existing path for global npm executables. Result of "npm bin -g": "${globalBin}"`)
+			error('Error: Could not find existing path for global npm executables. Result of "npm bin -g":', globalBin)
 		}
 	})
 } else {
-	error(`Mode '${mode}' is not supported. Please use install or remove.`);
+	error('Mode', mode, 'is not supported. Please use install or remove.');
 }
 

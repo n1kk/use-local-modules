@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 if [ -d "$(pwd)/node_modules/.bin" ]; then
     if [ "$1" == "-g" ]; then
         export PATH="$PATH:$(pwd)/node_modules/.bin"
