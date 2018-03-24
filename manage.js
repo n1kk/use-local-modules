@@ -17,6 +17,11 @@ function install(bin, info) {
 	var from = path.resolve(__dirname, cli_name + info.ext)
 	var to = path.resolve(bin, cli_name + info.map)
 	var operation = '->'
+	
+	if (fs.existsSync(to)) {
+		remove(bin, info, true)
+	}
+	
 	var linkErr
 	try {
 		try {
@@ -39,15 +44,15 @@ function install(bin, info) {
 	}
 }
 
-function remove(bin, info) {
+function remove(bin, info, silent) {
 	var scriptPath = path.resolve(bin, cli_name + info.map)
 	if (fs.existsSync(scriptPath)) {
 		try {
 			fs.unlinkSync(scriptPath)
-			log('Removed', scriptPath)
+			silent || log('Removed', scriptPath)
 		} catch (e) {
-			error('ERROR while removing', scriptPath)
-			error(e)
+			silent || error('ERROR while removing', scriptPath)
+			silent || error(e)
 		}
 	}
 }
